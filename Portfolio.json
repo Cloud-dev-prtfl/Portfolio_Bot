@@ -1,0 +1,66 @@
+{
+  "profile": {
+    "name": "Shubham Shirsat",
+    "title": "Software Developer | Data Science & Integration",
+    "linkedin_url": "https://www.linkedin.com/in/shubhamshirsat1",
+    "location": "Pune, Maharashtra, India",
+    "languages": ["English", "Marathi"]
+  },
+  "summary": "Innovative developer holding a Master of Computer Applications (MCA) with a strong focus on data science, system integration, and AI-driven solutions. Proven ability to build analytical dashboards, leverage large language models, and manage complex enterprise integrations.",
+  "education": [
+    {
+      "degree": "Master of Computer Applications (MCA)",
+      "institution": "[Add Institution Name]",
+      "graduation_year": "[Add Year]"
+    }
+  ],
+  "technical_skills": {
+    "programming_languages": ["Python"],
+    "frameworks_and_libraries": ["Streamlit", "Pandas"],
+    "ai_and_machine_learning": ["Google Gemini SDK", "OpenAI SDK"],
+    "integration_tools": ["Celigo"]
+  },
+  "projects": [
+    {
+      "title": "Enterprise Celigo Integration",
+      "date": "2025",
+      "technologies_used": ["Celigo"],
+      "description": "Engineered and successfully deployed a comprehensive integration project to streamline workflows and robust data synchronization across enterprise systems."
+    },
+    {
+      "title": "UAE Used Car Market Analytics Dashboard",
+      "date": "April 2025",
+      "technologies_used": ["Python", "Streamlit", "Pandas"],
+      "description": "Developed an interactive data science dashboard to process and analyze comprehensive automotive datasets (DriveArabia_All_uae_updated), enabling dynamic data visualization and market insights."
+    },
+    {
+      "title": "AI-Powered Exam Creation Agent",
+      "technologies_used": ["Python", "OpenAI SDK", "Google Gemini SDK"],
+      "description": "Designed an intelligent application capable of generating automated exams, leveraging advanced LLM capabilities for educational tools."
+    }
+  ],
+  "experience": [
+    {
+      "job_title": "[Add Current/Recent Job Title]",
+      "company": "[Add Company Name]",
+      "duration": "[Start Date] - Present",
+      "responsibilities": [
+        "Design, develop, and troubleshoot data-driven applications.",
+        "Integrate third-party APIs and generative AI models into existing architectures.",
+        "[Add additional quantifiable achievements]"
+      ]
+    }
+  ],
+  "professional_interests": [
+    "AI Development & Prompt Engineering",
+    "Indian IT Sector & Regional Infrastructure Developments",
+    "Data Visualization"
+  ],
+  "certifications": [
+    {
+      "name": "[Add Relevant Certification, e.g., Celigo Level 4 or AWS Certified Developer]",
+      "issuer": "[Add Issuer]",
+      "year": "[Add Year]"
+    }
+  ]
+}
