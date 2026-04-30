@@ -3,6 +3,14 @@ import { Conversation } from '../Conversation/Conversation.jsx';
 import { ChatInput } from '../ChatInput/ChatInput.jsx';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000';
+const TIMESTAMP_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+});
 
 const initialMessages = [
   {
@@ -17,14 +25,7 @@ const createMessage = (sender, text) => ({
   id: crypto.randomUUID(),
   sender,
   text,
-  timestamp: new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit',
-  }).format(new Date()),
+  timestamp: TIMESTAMP_FORMATTER.format(new Date()),
 });
 
 export function ChatWindow() {
