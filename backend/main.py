@@ -1,5 +1,6 @@
 import json
 import os
+import asyncio
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -43,17 +44,18 @@ async def on_startup() -> None:
 
 @app.post("/chat")
 async def chat(user_query: UserQuery) -> dict[str, str]:
-    try:
-        minified_json_data = json.dumps(json_knowledge_base, separators=(",", ":"))
-        user_message = user_query.message
-        system_instruction = (
-            "You are an AI assistant representing Shubham. Your sole purpose is to "
-            "answer questions about his professional experience, skills, and "
-            "background using strictly the provided JSON data. Do not use external "
-            "knowledge. If the answer is not in the JSON, politely decline. "
-            f"[KNOWLEDGE_BASE]: {minified_json_data}"
-        )
+    minified_json_data = json.dumps(json_knowledge_base, separators=(",", ":"))
+    user_message = user_query.message
+    system_instruction = (
+        "You are an AI assistant representing Shubham. Your sole purpose is to "
+        "answer questions about his professional experience, skills, and "
+        "background using strictly the provided JSON data. Do not use external "
+        "knowledge. If the answer is not in the JSON, politely decline. "
+        f"[KNOWLEDGE_BASE]: {minified_json_data}"
+    )
 
+    max_attempts = 3
+    for attempt in range(1, max_attempts + 1):
         try:
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
@@ -62,10 +64,23 @@ async def chat(user_query: UserQuery) -> dict[str, str]:
                     system_instruction=system_instruction
                 ),
             )
+            assistant_text = response.text or ""
+            return {"response": assistant_text}
         except Exception as error:
-            raise HTTPException(status_code=500, detail=str(error)) from error
+            error_text = str(error)
+            is_retryable = "503" in error_text or "UNAVAILABLE" in error_text
 
-        assistant_text = response.text or ""
-        return {"response": assistant_text}
-    except Exception as error:
-        raise HTTPException(status_code=500, detail=str(error)) from error
+            if is_retryable and attempt < max_attempts:
+                await asyncio.sleep(attempt)
+                continue
+
+            if is_retryable:
+                raise HTTPException(
+                    status_code=503,
+                    detail=(
+                        "The AI model is temporarily busy. "
+                        "Please retry in a few seconds."
+                    ),
+                ) from error
+
+            raise HTTPException(status_code=500, detail=error_text) from error
