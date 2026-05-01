@@ -44,8 +44,8 @@ class UserQuery(BaseModel):
 async def on_startup() -> None:
     global json_knowledge_base, system_instruction_text
 
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    portfolio_path = os.path.join(project_root, "Portfolio.json")
+    backend_dir = os.path.dirname(os.path.abspath(__file__))
+    portfolio_path = os.path.join(backend_dir, "Portfolio.json")
 
     with open(portfolio_path, "r", encoding="utf-8") as file:
         json_knowledge_base = json.load(file)
